@@ -1,0 +1,10 @@
+<button mat-button [matMenuTriggerFor]="languageMenu">Language</button>
+<mat-menu #languageMenu="matMenu" [overlapTrigger]="false">
+  <button mat-menu-item>English</button>
+  <button mat-menu-item>Chinese</button>
+</mat-menu>
+
+<button mat-button [matMenuTriggerFor]="accountMenu">Account</button>
+<mat-menu #accountMenu="matMenu" [overlapTrigger]="false">
+  <button mat-menu-item>Sign in</button>
+</mat-menu>
