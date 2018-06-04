@@ -18,6 +18,11 @@
     <app-nav-menu></app-nav-menu>
   </mat-sidenav>
 
-  <mat-sidenav-content>
-  </mat-sidenav-content>
+  <section class="sidenav-content" role="content">
+    <app-main></app-main>
+  </section>
 </mat-sidenav-container>
+
+<footer class="no-print">
+  <app-footer [versionInfo]="1.2.0" ></app-footer>
+</footer>

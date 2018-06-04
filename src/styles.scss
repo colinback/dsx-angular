@@ -21,3 +21,17 @@ $ng-io-theme: mat-light-theme($ng-io-primary, $ng-io-accent, $ng-io-warn);
 @include angular-material-theme($ng-io-theme);
 
 //@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+// import global variables
+@import './styles/constants';
+// foot scss
+@import './styles/footer';
+
+body {
+  font-family: $main-font;
+  margin: 0;
+  color: $darkgray;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

@@ -116,6 +116,11 @@ app-top-menu {
   }
 }
 
+.sidenav-content {
+  min-height: 100vh;
+  padding: 0 0 3rem;
+}
+
 // Sidenav
 .sidenav-container {
   width: 100%;
