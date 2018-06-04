@@ -1,0 +1,13 @@
+<div *ngIf="node.url">
+  <a href="{{node.url}}" [ngClass]="classes" title="{{node.tooltip}}"
+  (click)="headerClicked()" class="vertical-menu-item level-1 collapsed">
+    {{node.title}}
+  </a>
+</div>
+<div *ngIf="!node.url">
+  <button type="button" [ngClass]="classes" title="{{node.tooltip}}"
+  (click)="headerClicked()" class="vertical-menu-item heading level-1 collapsed">
+    {{node.title}}
+    <mat-icon class="rotating-icon" svgIcon="keyboard_arrow_right"></mat-icon>
+  </button>
+</div>

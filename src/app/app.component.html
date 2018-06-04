@@ -3,7 +3,7 @@
 
 <mat-toolbar color="primary" class="app-toolbar">
   <mat-toolbar-row>
-    <button mat-button class="hamburger" [class.starting]="isStarting" title="Side Menu">
+    <button mat-button class="hamburger" [class.starting]="isStarting" (click)="sidenav.toggle()" title="Side Menu">
       <mat-icon svgIcon="menu"></mat-icon>
     </button>
      <a class="nav-link home" href="/">
@@ -12,3 +12,12 @@
      <app-top-menu></app-top-menu>
   </mat-toolbar-row>
 </mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container" role="main">
+  <mat-sidenav #sidenav class="sidenav" [mode]="mode" [(opened)]="opened">
+    <app-nav-menu></app-nav-menu>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
