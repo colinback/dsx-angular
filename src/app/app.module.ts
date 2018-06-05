@@ -3,14 +3,10 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { NgModule } from '@angular/core';
 // import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatSortModule } from '@angular/material';
-import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,7 +18,9 @@ import { CustomIconRegistry, SVG_ICONS } from 'app/shared/custom-icon-registry';
 import { NavMenuComponent } from './layout/nav-menu/nav-menu.component';
 import { NavItemComponent } from './layout/nav-item/nav-item.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { MainComponent } from './layout/main/main.component';
+import { AppRoutingModule } from './app-routing.module';
+import { ProjectModule} from './modules/project/project.module';
+
 
 export const svgIconProviders = [
   {
@@ -51,26 +49,24 @@ export const svgIconProviders = [
     TopMenuComponent,
     NavMenuComponent,
     NavItemComponent,
-    FooterComponent,
-    MainComponent
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     CdkTableModule,
     // FormsModule,
     MatButtonModule,
-    MatFormFieldModule,
     MatIconModule,
-    MatInputModule,
     MatMenuModule,
     MatPaginatorModule,
     MatSidenavModule,
-    MatSortModule,
-    MatTableModule,
     MatToolbarModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
     // ReactiveFormsModule
+    ProjectModule,
+    AppRoutingModule,
+    ProjectModule
   ],
   providers: [
     { provide: MatIconRegistry, useClass: CustomIconRegistry },

@@ -12,6 +12,7 @@ export class NavMenuComponent implements OnInit {
       "title": "community",
       "tooltip": "community page"
     }, {
+      "url" : "/projects",
       "title": "projects",
       "tooltip": "projects page"
     }, {
