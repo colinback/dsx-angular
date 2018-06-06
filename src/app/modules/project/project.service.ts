@@ -4,6 +4,7 @@ import { ConnectableObservable, Observable, of } from 'rxjs';
 import { catchError, map, tap, publishLast } from 'rxjs/operators';
 
 import { Project } from './project.model';
+import { LoggerService } from 'app/shared/logger.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,14 +15,14 @@ export class ProjectService {
   // projects: Observable<Project[]>;
   private projectsUrl = 'api/projects';  // URL to web api
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private logger: LoggerService) {
     // this.projects = this.getProjects();
   }
 
   getProjects(): Observable<Project[]> {
     const projects = this.http.get<Project[]>(this.projectsUrl)
       .pipe(
-        tap(responseProjects => console.log('getProjects', responseProjects)),
+        tap(responseProjects => this.logger.log('getProjects', responseProjects)),
         catchError(this.handleError('getProjects', []))
       );
 
@@ -31,7 +32,7 @@ export class ProjectService {
   addProject(project: Project): Observable<Project> {
     return this.http.post<Project>(this.projectsUrl, project, httpOptions)
       .pipe(
-        tap(responseProject => console.log('posted project', responseProject)),
+        tap(responseProject => this.logger.log('posted project', responseProject)),
         catchError(this.handleError('addProject', project))
       );
   }

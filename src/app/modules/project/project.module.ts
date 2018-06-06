@@ -20,6 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryProjectService } from './in-memory-project.service';
 
+import { LoggerService } from 'app/shared/logger.service';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -43,7 +45,8 @@ import { InMemoryProjectService } from './in-memory-project.service';
     ProjectNewFormComponent
   ],
   providers: [
-    ProjectService
+    ProjectService,
+    LoggerService
   ]
 })
 export class ProjectModule { }
