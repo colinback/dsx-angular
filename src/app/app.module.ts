@@ -9,7 +9,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { TopMenuComponent } from './layout/top-menu/top-menu.component';
@@ -20,7 +19,6 @@ import { NavItemComponent } from './layout/nav-item/nav-item.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProjectModule} from './modules/project/project.module';
-
 
 export const svgIconProviders = [
   {
@@ -62,7 +60,6 @@ export const svgIconProviders = [
     MatSidenavModule,
     MatToolbarModule,
     BrowserAnimationsModule,
-    HttpClientModule,
     // ReactiveFormsModule
     ProjectModule,
     AppRoutingModule,

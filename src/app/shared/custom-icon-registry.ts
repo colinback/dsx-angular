@@ -54,7 +54,9 @@ export class CustomIconRegistry extends MatIconRegistry {
     svgIcons.forEach(icon => {
       // SECURITY: the source for the SVG icons is provided in code by trusted developers
       div.innerHTML = icon.svgSource;
-      this.preloadedSvgElements[icon.name] = div.querySelector('svg')!;
+      if (div.querySelector('svg') !== undefined) {
+        this.preloadedSvgElements[icon.name] = div.querySelector('svg');
+      }
     });
   }
 }

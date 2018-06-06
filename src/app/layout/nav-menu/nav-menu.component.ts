@@ -8,21 +8,21 @@ import { Component, OnInit } from '@angular/core';
 export class NavMenuComponent implements OnInit {
   nodes = [
     {
-      "url" : "/community",
-      "title": "community",
-      "tooltip": "community page"
+      url : '/community',
+      title: 'community',
+      tooltip: 'community page'
     }, {
-      "url" : "/projects",
-      "title": "projects",
-      "tooltip": "projects page"
+      url : '/projects',
+      title: 'projects',
+      tooltip: 'projects page'
     }, {
-      "title": "dashboard",
-      "tooltip": "dashboard page"
+      title: 'dashboard',
+      tooltip: 'dashboard page'
     },
     {
-      "url" : "/mlaas",
-      "title": "model managment",
-      "tooltip": "model managment page"
+      url : '/mlaas',
+      title: 'model managment',
+      tooltip: 'model managment page'
     }
   ];
 

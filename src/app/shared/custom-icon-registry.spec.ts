@@ -41,5 +41,7 @@ describe('CustomIconRegistry', () => {
 function createSvg(svgSrc: string): SVGElement {
   const div = document.createElement('div');
   div.innerHTML = svgSrc;
-  return div.querySelector('svg')!;
+  if (div.querySelector('svg') !== undefined) {
+    return div.querySelector('svg');
+  }
 }
