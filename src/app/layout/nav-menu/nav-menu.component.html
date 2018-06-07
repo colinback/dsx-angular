@@ -1,2 +1,28 @@
-<app-nav-item *ngFor="let node of nodes" [node]="node">
-</app-nav-item>
+<div>
+  <a routerLink="community" title="{{ 'left.community.tooltip' | translate }}"
+    class="vertical-menu-item level-1 collapsed">
+    {{ 'left.community.title' | translate }}
+  </a>
+</div>
+
+<div>
+  <a routerLink="projects" title="{{ 'left.projects.tooltip' | translate }}"
+    class="vertical-menu-item level-1 collapsed">
+    {{ 'left.projects.title' | translate }}
+  </a>
+</div>
+
+<div>
+  <button type="button" title="{{ 'left.dashboard.tooltip' | translate }}"
+    class="vertical-menu-item heading level-1 collapsed">
+    {{ 'left.dashboard.title' | translate }}
+    <mat-icon class="rotating-icon" svgIcon="keyboard_arrow_right"></mat-icon>
+  </button>
+</div>
+
+<div>
+  <a title="{{ 'left.mlaas.tooltip' | translate }}"
+    class="vertical-menu-item level-1 collapsed">
+    {{ 'left.mlaas.title' | translate }}
+  </a>
+</div>

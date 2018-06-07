@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CdkTableModule } from '@angular/cdk/table';
 import { NgModule } from '@angular/core';
-// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material';
@@ -9,16 +8,20 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { TopMenuComponent } from './layout/top-menu/top-menu.component';
 
 import { CustomIconRegistry, SVG_ICONS } from 'app/shared/custom-icon-registry';
 import { NavMenuComponent } from './layout/nav-menu/nav-menu.component';
-import { NavItemComponent } from './layout/nav-item/nav-item.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProjectModule} from './modules/project/project.module';
+
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {MissingTranslationHandler, MissingTranslationHandlerParams} from '@ngx-translate/core';
 
 export const svgIconProviders = [
   {
@@ -41,18 +44,30 @@ export const svgIconProviders = [
   }
 ];
 
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
+
+export class MissingTranslation implements MissingTranslationHandler {
+    handle(params: MissingTranslationHandlerParams) {
+        return 'missing';
+    }
+}
+
 @NgModule({
   declarations: [
     AppComponent,
     TopMenuComponent,
     NavMenuComponent,
-    NavItemComponent,
     FooterComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     CdkTableModule,
     // FormsModule,
+    // ReactiveFormsModule
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
@@ -60,10 +75,20 @@ export const svgIconProviders = [
     MatSidenavModule,
     MatToolbarModule,
     BrowserAnimationsModule,
-    // ReactiveFormsModule
+    HttpClientModule,
     ProjectModule,
-    AppRoutingModule,
-    ProjectModule
+    // i18n
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      },
+      missingTranslationHandler: {
+        provide: MissingTranslationHandler,
+        useClass: MissingTranslation
+      }
+    })
   ],
   providers: [
     { provide: MatIconRegistry, useClass: CustomIconRegistry },

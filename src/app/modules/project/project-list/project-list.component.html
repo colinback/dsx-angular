@@ -9,8 +9,12 @@
         <div class="l-flex--column">
           <div class="showcase">
             <header class="c-header">
-              <a class="h-anchor-offset"></a>
-              <h2>Project List</h2>
+              <h2>{{ 'project.list.label' | translate }}</h2>
+
+              <button mat-raised-button color="primary" routerLink='new'>
+                <mat-icon>add</mat-icon>
+                {{ 'project.create.label' | translate }}
+              </button>
             </header>
 
             <mat-form-field>

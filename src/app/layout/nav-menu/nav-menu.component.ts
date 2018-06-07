@@ -6,27 +6,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-menu.component.scss']
 })
 export class NavMenuComponent implements OnInit {
-  nodes = [
-    {
-      url : '/community',
-      title: 'community',
-      tooltip: 'community page'
-    }, {
-      url : '/projects',
-      title: 'projects',
-      tooltip: 'projects page'
-    }, {
-      title: 'dashboard',
-      tooltip: 'dashboard page'
-    },
-    {
-      url : '/mlaas',
-      title: 'model managment',
-      tooltip: 'model managment page'
-    }
-  ];
-
-  constructor() { }
+  // nodes = [
+  //   {
+  //     url : '/community',
+  //     title: 'community',
+  //     tooltip: 'community page'
+  //   }, {
+  //     url : '/projects',
+  //     title: 'projects',
+  //     tooltip: 'projects page'
+  //   }, {
+  //     title: 'dashboard',
+  //     tooltip: 'dashboard page'
+  //   },
+  //   {
+  //     url : '/mlaas',
+  //     title: 'model managment',
+  //     tooltip: 'model managment page'
+  //   }
+  // ];
 
   ngOnInit() {
   }

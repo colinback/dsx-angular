@@ -1,5 +1,6 @@
 import { Component, HostBinding, HostListener, ViewChild, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,15 @@ export class AppComponent implements OnInit {
   get mode() { return this.isSideBySide ? 'side' : 'over'; }
 
   @ViewChild(MatSidenav) sidenav: MatSidenav;
+
+  constructor(private translate: TranslateService) {
+    translate.addLangs(['en', 'zh-cn']);
+
+    // this language will be used as a fallback when a translation isn't found in the current language
+    translate.setDefaultLang('en');
+    // the lang to use, if the lang isn't available, it will use the current loader to get them
+    translate.use('en');
+  }
 
   ngOnInit() {
     this.onResize(window.innerWidth);

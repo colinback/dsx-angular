@@ -1,0 +1,45 @@
+{
+  "project": {
+    "create": {
+      "label": "创建项目",
+      "id": "ID",
+      "name": "项目名字",
+      "description": "项目描述",
+      "type": "项目类型",
+      "cancel": "取消",
+      "submit": "提交"
+    },
+    "list": {
+      "label": "项目列表"
+    }
+  },
+  "top": {
+    "account": {
+      "label": "账号",
+      "signin": "登录"
+    },
+    "language": {
+      "label": "语言",
+      "english": "英语",
+      "chinese": "中文"
+    }
+  },
+  "left": {
+    "community": {
+      "tooltip": "社区首页",
+      "title": "社区"
+    },
+    "projects": {
+      "tooltip": "项目列表",
+      "title": "项目"
+    },
+    "dashboard": {
+      "tooltip": "仪表盘",
+      "title": "仪表盘"
+    },
+    "mlaas": {
+      "tooltip": "模型管理",
+      "title": "模型"
+    }
+  }
+}

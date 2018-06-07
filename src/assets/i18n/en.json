@@ -1,0 +1,45 @@
+{
+  "project": {
+    "create": {
+      "label": "Create Project",
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "type": "Type",
+      "cancel": "Cancel",
+      "submit": "Submit"
+    },
+    "list": {
+      "label": "Project List"
+    }
+  },
+  "top": {
+    "account": {
+      "label": "Account",
+      "signin": "Signin"
+    },
+    "language": {
+      "label": "Language",
+      "english": "English",
+      "chinese": "Chinese"
+    }
+  },
+  "left": {
+    "community": {
+      "tooltip": "community home",
+      "title": "community"
+    },
+    "projects": {
+      "tooltip": "projects list",
+      "title": "projects"
+    },
+    "dashboard": {
+      "tooltip": "admin dashboard",
+      "title": "dashboard"
+    },
+    "mlaas": {
+      "tooltip": "model managment",
+      "title": "models"
+    }
+  }
+}

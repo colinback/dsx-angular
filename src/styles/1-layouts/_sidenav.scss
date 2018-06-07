@@ -16,7 +16,7 @@ app-nav-menu {
     margin-top: 16px;
   }
 
-  app-nav-item div a {
+  div a {
     padding-left: 6px;
   }
 }
@@ -165,11 +165,11 @@ button.vertical-menu-item {
 app-nav-menu.top-menu {
   padding: 24px 0 0;
 
-  app-nav-item:last-child div {
+  &:last-child div {
     border-bottom: 1px solid rgba($mediumgray, 0.5);
   }
 
-  app-nav-item:first-child div {
+  &:first-child div {
     border-top: 1px solid rgba($mediumgray, 0.5);
   }
 }

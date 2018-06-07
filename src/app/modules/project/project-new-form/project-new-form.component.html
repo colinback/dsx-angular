@@ -9,28 +9,28 @@
         <div class="l-flex--column">
           <div class="showcase" [hidden]="submitted">
             <header class="c-header">
-              <a class="h-anchor-offset"></a>
-              <h2>Create Project</h2>
+              <h2>{{ 'project.create.label' | translate }}</h2>
             </header>
 
             <form [formGroup]="options" (ngSubmit)="onSave()" #projectForm="ngForm">
-              <mat-form-field floatLabel="auto">
+              <label for="id">{{ 'project.create.id' | translate }}</label>
+              <mat-form-field floatLabel="never">
                 <input matInput type="number" placeholder="Project ID" formControlName="id">
                 <mat-error *ngIf="options.get('id')?.invalid">Minimum number: 1</mat-error>
               </mat-form-field>
 
-              <label for="name">Name</label>
+              <label for="name">{{ 'project.create.name' | translate }}</label>
               <mat-form-field floatLabel="never">
                 <input matInput maxlength="20" placeholder="Project Name" formControlName="name" required>
                 <mat-hint align="end">{{options.value.name?.length || 0}}/20</mat-hint>
               </mat-form-field>
 
-              <label for="description">Description</label>
+              <label for="description">{{ 'project.create.description' | translate }}</label>
               <mat-form-field floatLabel="never">
                 <textarea matInput placeholder="Project Description" formControlName="description"></textarea>
               </mat-form-field>
 
-              <label for="type">Type</label>
+              <label for="type">{{ 'project.create.type' | translate }}</label>
               <mat-form-field floatLabel="never">
                 <mat-select placeholder="Type" formControlName="type">
                   <mat-option value="Normal">Normal</mat-option>
@@ -38,8 +38,8 @@
                 </mat-select>
               </mat-form-field>
 
-              <a mat-raised-button color="primary" routerLink="/projects">Cancel</a>
-              <button mat-raised-button color="primary" [disabled]="!projectForm.form.valid">Create</button>
+              <a mat-raised-button color="primary" routerLink="/projects">{{ 'project.create.cancel' | translate }}</a>
+              <button mat-raised-button color="primary" [disabled]="!projectForm.form.valid">{{ 'project.create.submit' | translate }}</button>
             </form>
           </div>
         </div>
