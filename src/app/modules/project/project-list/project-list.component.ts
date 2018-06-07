@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import { Project } from '../project.model';
 import { ProjectService } from '../project.service';
+import { ConfirmDialogComponent } from 'app/modules/project/confirm-dialog/confirm-dialog.component';
+
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-project-list',
@@ -9,13 +12,16 @@ import { ProjectService } from '../project.service';
   styleUrls: ['./project-list.component.css']
 })
 export class ProjectListComponent implements OnInit {
-  displayedColumns = ['name', 'type', 'role', 'lastUpdated'];
+  displayedColumns = ['name', 'type', 'role', 'lastUpdated', 'action'];
   dataSource: MatTableDataSource<Project>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private projectService: ProjectService) { }
+  constructor(
+    private projectService: ProjectService,
+    private deleteConfirmDialog: MatDialog
+  ) { }
 
   ngOnInit() {
     this.getProjects();
@@ -30,6 +36,13 @@ export class ProjectListComponent implements OnInit {
       });
   }
 
+  onRemove(id: number) {
+    this.projectService.deleteProject(id)
+      .subscribe(() => {
+        this.dataSource.data = _.reject(this.dataSource.data, {'id': id});
+      });
+  }
+
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
@@ -37,5 +50,18 @@ export class ProjectListComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  openDeleteConfirmDialog(project: Project): void {
+    const dialogRef = this.deleteConfirmDialog.open(ConfirmDialogComponent, {
+      width: '250px',
+      data: { name: project.name }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'toDelete') {
+        this.onRemove(project.id);
+      }
+    });
   }
 }

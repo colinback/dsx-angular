@@ -19,21 +19,33 @@ export class ProjectService {
     // this.projects = this.getProjects();
   }
 
+  /** GET: get the projects from the server */
   getProjects(): Observable<Project[]> {
     const projects = this.http.get<Project[]>(this.projectsUrl)
       .pipe(
-        tap(responseProjects => this.logger.log('getProjects', responseProjects)),
+        tap(responseProjects => this.logger.log('Get projects successfully', responseProjects)),
         catchError(this.handleError('getProjects', []))
       );
 
     return projects;
   }
 
+  /** POST: add the project from the server */
   addProject(project: Project): Observable<Project> {
     return this.http.post<Project>(this.projectsUrl, project, httpOptions)
       .pipe(
-        tap(responseProject => this.logger.log('posted project', responseProject)),
+        tap(responseProject => this.logger.log('Create project successfully', responseProject)),
         catchError(this.handleError('addProject', project))
+      );
+  }
+
+  /** DELETE: delete the project from the server */
+  deleteProject(id: number): Observable<{}> {
+    const url = `${this.projectsUrl}/${id}`;
+    return this.http.delete(url, httpOptions)
+      .pipe(
+        tap(() => this.logger.log(`Delete project [ 'id': ${id} ] successfully`)),
+        catchError(this.handleError('deleteProject'))
       );
   }
 
