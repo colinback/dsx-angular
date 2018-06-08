@@ -24,6 +24,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MissingTranslationHandler, MissingTranslationHandlerParams } from '@ngx-translate/core';
 
+import { CommunicationService } from './shared/communication.service';
+
 export const svgIconProviders = [
   {
     provide: SVG_ICONS,
@@ -73,6 +75,7 @@ export class MissingTranslation implements MissingTranslationHandler {
     MatIconModule,
     MatMenuModule,
     MatPaginatorModule,
+    MatProgressBarModule,
     MatSidenavModule,
     MatToolbarModule,
     BrowserAnimationsModule,
@@ -93,7 +96,8 @@ export class MissingTranslation implements MissingTranslationHandler {
   ],
   providers: [
     { provide: MatIconRegistry, useClass: CustomIconRegistry },
-    svgIconProviders
+    svgIconProviders,
+    CommunicationService
   ],
   bootstrap: [AppComponent]
 })

@@ -3,6 +3,7 @@ import { MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/ma
 import { Project } from '../project.model';
 import { ProjectService } from '../project.service';
 import { ConfirmDialogComponent } from 'app/modules/project/confirm-dialog/confirm-dialog.component';
+import { CommunicationService } from 'app/shared/communication.service';
 
 import * as _ from 'lodash';
 
@@ -20,7 +21,8 @@ export class ProjectListComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    private deleteConfirmDialog: MatDialog
+    private deleteConfirmDialog: MatDialog,
+    private communication: CommunicationService
   ) { }
 
   ngOnInit() {
@@ -28,8 +30,12 @@ export class ProjectListComponent implements OnInit {
   }
 
   getProjects(): void {
+    this.communication.sendData({ isFetching: true });
     this.projectService.getProjects()
       .subscribe(projects => {
+        // If progress bar has been shown, keep it for at least 500ms (to avoid flashing).
+        setTimeout(() => this.communication.sendData({ isFetching: false }), 500);
+
         this.dataSource = new MatTableDataSource(projects);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -37,8 +43,12 @@ export class ProjectListComponent implements OnInit {
   }
 
   onRemove(id: number) {
+    this.communication.sendData({ isFetching: true });
     this.projectService.deleteProject(id)
       .subscribe(() => {
+        // If progress bar has been shown, keep it for at least 500ms (to avoid flashing).
+        setTimeout(() => this.communication.sendData({ isFetching: false }), 500);
+
         this.dataSource.data = _.reject(this.dataSource.data, {'id': id});
       });
   }
