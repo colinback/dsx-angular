@@ -6,6 +6,14 @@
 </div>
 
 <mat-toolbar color="primary" class="app-toolbar">
+  <mat-toolbar-row class="notification-container">
+    <app-notification
+      icon="insert_comment"
+      iconLabel="Announcement"
+      (dismissed)="notificationDismissed()">
+      Version 6 of Angular Now Available!
+    </app-notification>
+  </mat-toolbar-row>
   <mat-toolbar-row>
     <button mat-button class="hamburger" [class.starting]="isStarting" (click)="sidenav.toggle()" title="Side Menu">
       <mat-icon svgIcon="menu"></mat-icon>

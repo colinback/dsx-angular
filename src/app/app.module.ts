@@ -25,6 +25,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MissingTranslationHandler, MissingTranslationHandlerParams } from '@ngx-translate/core';
 
 import { CommunicationService } from './shared/communication.service';
+import { NotificationComponent } from './layout/notification/notification.component';
 
 export const svgIconProviders = [
   {
@@ -42,6 +43,18 @@ export const svgIconProviders = [
       name: 'menu',
       svgSource: '<svg xmlns="http://www.w3.org/2000/svg" focusable="false" ' +
                  'viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>'
+    },
+    multi: true
+  },
+  {
+    provide: SVG_ICONS,
+    useValue: {
+      name: 'insert_comment',
+      svgSource:
+      '<svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">' +
+        '<path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>' +
+        '<path d="M0 0h24v24H0z" fill="none"/>' +
+      '</svg>'
     },
     multi: true
   }
@@ -63,7 +76,8 @@ export class MissingTranslation implements MissingTranslationHandler {
     AppComponent,
     TopMenuComponent,
     NavMenuComponent,
-    FooterComponent
+    FooterComponent,
+    NotificationComponent
   ],
   imports: [
     AppRoutingModule,

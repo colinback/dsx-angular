@@ -1,0 +1,8 @@
+<a class="content">
+  <mat-icon class="icon" [svgIcon]="icon" [attr.aria-label]="iconLabel"></mat-icon>
+  <span class="message"><ng-content></ng-content></span>
+</a>
+
+<button mat-icon-button class="close-button" aria-label="Close" (click)="dismiss()">
+  <mat-icon>close</mat-icon>
+</button>
