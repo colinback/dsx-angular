@@ -10,6 +10,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { TopMenuComponent } from './layout/top-menu/top-menu.component';
@@ -26,6 +27,7 @@ import { MissingTranslationHandler, MissingTranslationHandlerParams } from '@ngx
 
 import { CommunicationService } from './shared/communication.service';
 import { NotificationComponent } from './layout/notification/notification.component';
+import { ErrorHandlerInterceptor } from './shared/interceptor/errorhandler.interceptor';
 
 export const svgIconProviders = [
   {
@@ -111,7 +113,15 @@ export class MissingTranslation implements MissingTranslationHandler {
   providers: [
     { provide: MatIconRegistry, useClass: CustomIconRegistry },
     svgIconProviders,
-    CommunicationService
+    CommunicationService,
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: ErrorHandlerInterceptor,
+        multi: true,
+        deps: [
+            CommunicationService
+        ]
+    }
   ],
   bootstrap: [AppComponent]
 })
