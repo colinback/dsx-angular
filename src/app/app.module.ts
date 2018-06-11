@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CdkTableModule } from '@angular/cdk/table';
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material';
@@ -24,10 +24,25 @@ import { ProjectModule} from './modules/project/project.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MissingTranslationHandler, MissingTranslationHandlerParams } from '@ngx-translate/core';
+import { Ng2Webstorage, LocalStorageService, SessionStorageService  } from 'ngx-webstorage';
 
 import { EventManager } from './shared/event-manager.service';
 import { NotificationComponent } from './layout/notification/notification.component';
 import { ErrorHandlerInterceptor } from './shared/interceptor/errorhandler.interceptor';
+import { AuthInterceptor } from './shared/interceptor/auth.interceptor';
+import { AuthExpiredInterceptor } from './shared/interceptor/auth-expired.interceptor';
+
+import { LoginService } from './shared/login.service';
+import { CSRFService } from './shared/auth/csrf.service';
+import { Principal } from './shared/auth/principal.service';
+import { AuthServerProvider } from './shared/auth/auth-jwt.service';
+import { AccountService } from './shared/auth/account.service';
+import { StateStorageService } from './shared/auth/state-storage.service';
+import { UserRouteAccessService } from './shared/auth/user-route-access.service';
+import { HasAnyAuthorityDirective } from './shared/auth/has-any-authority.directive';
+
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryApiService } from './in-memory-api.service';
 
 export const svgIconProviders = [
   {
@@ -79,12 +94,18 @@ export class MissingTranslation implements MissingTranslationHandler {
     TopMenuComponent,
     NavMenuComponent,
     FooterComponent,
-    NotificationComponent
+    NotificationComponent,
+    HasAnyAuthorityDirective
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     CdkTableModule,
+    Ng2Webstorage.forRoot({ prefix: 'dsx', separator: '-'}),
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryApiService, { passThruUnknownUrl: true, dataEncapsulation: false }
+    ),
     // FormsModule,
     // ReactiveFormsModule
     MatButtonModule,
@@ -95,7 +116,6 @@ export class MissingTranslation implements MissingTranslationHandler {
     MatSidenavModule,
     MatToolbarModule,
     BrowserAnimationsModule,
-    HttpClientModule,
     ProjectModule,
     // i18n
     TranslateModule.forRoot({
@@ -111,16 +131,42 @@ export class MissingTranslation implements MissingTranslationHandler {
     })
   ],
   providers: [
+    AccountService,
+    AuthServerProvider,
+    Principal,
+    StateStorageService,
+    LoginService,
+    LocalStorageService,
+    SessionStorageService,
+    CSRFService,
     { provide: MatIconRegistry, useClass: CustomIconRegistry },
     svgIconProviders,
     EventManager,
+    UserRouteAccessService,
     {
-        provide: HTTP_INTERCEPTORS,
-        useClass: ErrorHandlerInterceptor,
-        multi: true,
-        deps: [
-            EventManager
-        ]
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+      deps: [
+        LocalStorageService,
+        SessionStorageService
+      ]
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthExpiredInterceptor,
+      multi: true,
+      deps: [
+        Injector
+      ]
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorHandlerInterceptor,
+      multi: true,
+      deps: [
+        EventManager
+      ]
     }
   ],
   bootstrap: [AppComponent]

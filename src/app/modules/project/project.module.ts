@@ -20,7 +20,6 @@ import { ProjectNewFormComponent } from './project-new-form/project-new-form.com
 
 import { ProjectService } from './project.service';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryProjectService } from './in-memory-project.service';
 
 import { LoggerService } from 'app/shared/logger.service';
 
@@ -32,9 +31,6 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryProjectService, { passThruUnknownUrl: true, dataEncapsulation: false }
-    ),
     MatButtonModule,
     MatDialogModule,
     MatFormFieldModule,

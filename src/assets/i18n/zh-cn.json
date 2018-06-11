@@ -16,7 +16,8 @@
   "top": {
     "account": {
       "label": "账号",
-      "signin": "登录"
+      "login": "登录",
+      "logout": "退出"
     },
     "language": {
       "label": "语言",

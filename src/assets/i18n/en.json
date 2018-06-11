@@ -16,7 +16,8 @@
   "top": {
     "account": {
       "label": "Account",
-      "signin": "Signin"
+      "login": "Signin",
+      "logout": "Signout"
     },
     "language": {
       "label": "Language",

@@ -1,7 +1,6 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-// import { Project } from './project.model';
 
-export class InMemoryProjectService implements InMemoryDbService {
+export class InMemoryApiService implements InMemoryDbService {
 
   createDb() {
     const projects = [
@@ -51,6 +50,38 @@ export class InMemoryProjectService implements InMemoryDbService {
       }
     ];
 
-    return { projects };
+    const accounts = [
+      {
+        id : 1,
+        login : 'admin',
+        firstName : 'Administrator',
+        lastName : 'Administrator',
+        email : 'admin@localhost',
+        imageUrl : '',
+        activated : true,
+        langKey : 'en',
+        createdBy : 'system',
+        createdDate : 1521170361180,
+        lastModifiedBy : 'system',
+        lastModifiedDate : null,
+        authorities : [ 'ROLE_USER', 'ROLE_ADMIN' ]
+      }, {
+        id : 2,
+        login : 'user',
+        firstName : 'User',
+        lastName : 'User',
+        email : 'user@localhost',
+        imageUrl : '',
+        activated : true,
+        langKey : 'en',
+        createdBy : 'system',
+        createdDate : 1521170361180,
+        lastModifiedBy : 'system',
+        lastModifiedDate : null,
+        authorities : [ 'ROLE_USER' ]
+      }
+    ];
+
+    return { accounts, projects };
   }
 }

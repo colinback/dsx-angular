@@ -1,4 +1,4 @@
-<button mat-button [matMenuTriggerFor]="languageMenu">
+<button *appHasAnyAuthority="'ROLE_ADMIN'" mat-button [matMenuTriggerFor]="languageMenu">
   <mat-icon>language</mat-icon>
   {{ 'top.language.label' | translate }}
 </button>
@@ -11,6 +11,7 @@
   <mat-icon>account_circle</mat-icon>
   {{ 'top.account.label' | translate }}
 </button>
-<mat-menu #accountMenu="matMenu" [overlapTrigger]="false">
-  <button mat-menu-item>{{ 'top.account.signin' | translate }}</button>
+<mat-menu #accountMenu="matMenu" [overlapTrigger]="false" [ngSwitch]="isAuthenticated()">
+  <button *ngSwitchCase="false" mat-menu-item (click)="login()" >{{ 'top.account.login' | translate }}</button>
+  <button *ngSwitchCase="true" mat-menu-item (click)="logout()" >{{ 'top.account.logout' | translate }}</button>
 </mat-menu>
