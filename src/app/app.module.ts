@@ -25,7 +25,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MissingTranslationHandler, MissingTranslationHandlerParams } from '@ngx-translate/core';
 
-import { CommunicationService } from './shared/communication.service';
+import { EventManager } from './shared/event-manager.service';
 import { NotificationComponent } from './layout/notification/notification.component';
 import { ErrorHandlerInterceptor } from './shared/interceptor/errorhandler.interceptor';
 
@@ -113,13 +113,13 @@ export class MissingTranslation implements MissingTranslationHandler {
   providers: [
     { provide: MatIconRegistry, useClass: CustomIconRegistry },
     svgIconProviders,
-    CommunicationService,
+    EventManager,
     {
         provide: HTTP_INTERCEPTORS,
         useClass: ErrorHandlerInterceptor,
         multi: true,
         deps: [
-            CommunicationService
+            EventManager
         ]
     }
   ],

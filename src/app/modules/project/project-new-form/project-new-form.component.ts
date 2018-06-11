@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Project } from '../project.model';
 import { ProjectService } from '../project.service';
-import { CommunicationService } from 'app/shared/communication.service';
+import { EventManager } from 'app/shared/event-manager.service';
 
 @Component({
   selector: 'app-project-new-form',
@@ -21,7 +21,7 @@ export class ProjectNewFormComponent implements OnInit {
     fb: FormBuilder,
     private projectService: ProjectService,
     private router: Router,
-    private communication: CommunicationService
+    private eventManager: EventManager
   ) {
     this.options = fb.group({
       'id': [null, Validators.min(1)],
@@ -45,11 +45,11 @@ export class ProjectNewFormComponent implements OnInit {
       Date.now()
     );
 
-    this.communication.sendData({ isFetching: true });
+    this.eventManager.broadcast({name: 'dsxApp.progress-bar', content: true});
     this.projectService.addProject(this.model)
       .subscribe((project: Project) => {
         // If progress bar has been shown, keep it for at least 500ms (to avoid flashing).
-        setTimeout(() => this.communication.sendData({ isFetching: false }), 500);
+        setTimeout(() => this.eventManager.broadcast({name: 'dsxApp.progress-bar', content: false}), 500);
 
         this.submitted = true;
         this.router.navigate(['/projects']);

@@ -2,7 +2,7 @@ import { Component, HostBinding, HostListener, ViewChild, OnInit, OnDestroy } fr
 import { MatSidenav } from '@angular/material/sidenav';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { CommunicationService } from './shared/communication.service';
+import { EventManager } from './shared/event-manager.service';
 import { NotificationComponent } from './layout/notification/notification.component';
 
 @Component({
@@ -11,7 +11,7 @@ import { NotificationComponent } from './layout/notification/notification.compon
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  subscription: Subscription;
+  progressBarListener: Subscription;
 
   /**
    * These CSS classes are computed from the current state of the application
@@ -45,7 +45,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private translate: TranslateService,
-    private communication: CommunicationService
+    private eventManager: EventManager
   ) {
     translate.addLangs(['en', 'zh-cn']);
     // this language will be used as a fallback when a translation isn't found in the current language
@@ -53,9 +53,8 @@ export class AppComponent implements OnInit, OnDestroy {
     // the lang to use, if the lang isn't available, it will use the current loader to get them
     translate.use('en');
 
-    this.subscription = communication.progressBarStatus$.subscribe(
-      status => {
-        this.isFetching = status.isFetching;
+    this.progressBarListener = eventManager.subscribe('dsxApp.progress-bar', (response) => {
+      setTimeout(() => this.isFetching = response.content);
     });
   }
 
@@ -67,7 +66,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // prevent memory leak when component destroyed
-    this.subscription.unsubscribe();
+    if (this.progressBarListener !== undefined && this.progressBarListener !== null) {
+      this.eventManager.destroy(this.progressBarListener);
+    }
   }
 
   updateShell() {
