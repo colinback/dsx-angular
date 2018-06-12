@@ -1,8 +1,20 @@
 <header class="marketing-banner">
-  <span *ngFor="let link of links; let lst = last" class="banner-headline">
-    <a routerLink="{{ link.url }}">
-      {{ link.name }}
-    </a>
-    <mat-icon *ngIf="!lst">chevron_right</mat-icon>
+  <span>
+    <span *ngFor="let link of links; let lst = last" class="banner-headline">
+      <a routerLink="{{ link.url }}">
+        {{ link.name }}
+      </a>
+      <mat-icon *ngIf="!lst">chevron_right</mat-icon>
+    </span>
+  </span>
+  <span>
+    <button mat-button class="hamburger" color="primary" (click)="toggle('info')"
+      matTooltip="Info">
+      <mat-icon>info</mat-icon>
+    </button>
+    <button mat-button class="hamburger" color="primary" (click)="toggle('connection')"
+      matTooltip="Connections">
+      <mat-icon>view_list</mat-icon>
+    </button>
   </span>
 </header>

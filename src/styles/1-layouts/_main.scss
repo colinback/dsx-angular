@@ -2,6 +2,9 @@
 $blue: #1976D2;
 
 .marketing-banner {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
   background-color: lighten($blue, 10);
   margin-top: 64px;
   padding: 16px;

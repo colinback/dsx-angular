@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { EventManager } from 'app/shared/event-manager.service';
 
 @Component({
   selector: 'app-header',
@@ -8,10 +9,14 @@ import { Component, Input, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   @Input() links: any;
+  @Input() palettes: any;
 
-  constructor() { }
+  constructor(private eventManager: EventManager) { }
 
   ngOnInit() {
   }
 
+  toggle(palette: string) {
+    this.eventManager.broadcast({name: 'dsxApp.header', content: palette});
+  }
 }

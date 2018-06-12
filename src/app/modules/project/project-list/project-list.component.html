@@ -1,77 +1,83 @@
 <app-header [links]="headlinks"></app-header>
 
-<article>
-  <div class="projects-container">
-    <div class="l-flex--column">
-      <div class="showcase">
-        <header class="c-header">
-          <h2>{{ 'project.list.label' | translate }}</h2>
+<mat-sidenav-container class="sidenav-palette">
+  <mat-sidenav class="palette" [opened]="isOpened" mode="side" position="end">
+    <app-palette [palette]="previousOpenPalette"></app-palette>
+  </mat-sidenav>
 
-          <button mat-raised-button color="primary" routerLink='new'>
-            <mat-icon>add</mat-icon>
-            {{ 'project.create.label' | translate }}
-          </button>
-        </header>
+  <article>
+    <div class="projects-container">
+      <div class="l-flex--column">
+        <div class="showcase">
+          <header class="c-header">
+            <h2>{{ 'project.list.label' | translate }}</h2>
 
-        <mat-form-field>
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-        </mat-form-field>
+            <button mat-raised-button color="primary" routerLink='new'>
+              <mat-icon>add</mat-icon>
+              {{ 'project.create.label' | translate }}
+            </button>
+          </header>
 
-        <div class="mat-elevation-z8">
-          <table mat-table [dataSource]="dataSource" matSort>
+          <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          </mat-form-field>
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-              <td mat-cell *matCellDef="let row"> {{row.name}} </td>
-            </ng-container>
+          <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
 
-            <!-- Type Column -->
-            <ng-container matColumnDef="type">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Project Type</th>
-              <td mat-cell *matCellDef="let row"> {{row.type}} </td>
-            </ng-container>
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+              </ng-container>
 
-            <!-- Role Column -->
-            <ng-container matColumnDef="role">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
-              <td mat-cell *matCellDef="let row"> {{row.role}} </td>
-            </ng-container>
+              <!-- Type Column -->
+              <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Project Type</th>
+                <td mat-cell *matCellDef="let row"> {{row.type}} </td>
+              </ng-container>
 
-            <!-- Last Updated Column -->
-            <ng-container matColumnDef="lastUpdated">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Updated </th>
-              <td mat-cell *matCellDef="let row"> {{row.lastUpdated | date:'medium'}} </td>
-            </ng-container>
+              <!-- Role Column -->
+              <ng-container matColumnDef="role">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
+                <td mat-cell *matCellDef="let row"> {{row.role}} </td>
+              </ng-container>
 
-            <ng-container matColumnDef="action">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-              <td mat-cell *matCellDef="let row">
-                <button mat-icon-button [matMenuTriggerFor]="actionMenu">
-                  <mat-icon>more_vert</mat-icon>
-                </button>
-                <mat-menu #actionMenu="matMenu">
-                  <button mat-menu-item disabled>
-                    <mat-icon>edit</mat-icon>
-                    <span>Edit</span>
+              <!-- Last Updated Column -->
+              <ng-container matColumnDef="lastUpdated">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Updated </th>
+                <td mat-cell *matCellDef="let row"> {{row.lastUpdated | date:'medium'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                <td mat-cell *matCellDef="let row">
+                  <button mat-icon-button [matMenuTriggerFor]="actionMenu">
+                    <mat-icon>more_vert</mat-icon>
                   </button>
-                  <button mat-menu-item (click)="openDeleteConfirmDialog(row)">
-                    <mat-icon>delete</mat-icon>
-                    <span>Delete</span>
-                  </button>
-                </mat-menu>
-              </td>
-            </ng-container>
+                  <mat-menu #actionMenu="matMenu">
+                    <button mat-menu-item disabled>
+                      <mat-icon>edit</mat-icon>
+                      <span>Edit</span>
+                    </button>
+                    <button mat-menu-item (click)="openDeleteConfirmDialog(row)">
+                      <mat-icon>delete</mat-icon>
+                      <span>Delete</span>
+                    </button>
+                  </mat-menu>
+                </td>
+              </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-            </tr>
-          </table>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+              </tr>
+            </table>
 
-          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+          </div>
+
         </div>
-
       </div>
     </div>
-  </div>
-</article>
+  </article>
+</mat-sidenav-container>

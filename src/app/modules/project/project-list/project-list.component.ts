@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import { Project } from '../project.model';
 import { ProjectService } from '../project.service';
 import { ConfirmDialogComponent } from 'app/modules/project/confirm-dialog/confirm-dialog.component';
+import { Subscription } from 'rxjs';
 import { EventManager } from 'app/shared/event-manager.service';
 
 import * as _ from 'lodash';
@@ -12,7 +13,7 @@ import * as _ from 'lodash';
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.css']
 })
-export class ProjectListComponent implements OnInit {
+export class ProjectListComponent implements OnInit, OnDestroy {
   displayedColumns = ['name', 'type', 'role', 'lastUpdated', 'action'];
   dataSource: MatTableDataSource<Project>;
   headlinks = [
@@ -22,6 +23,10 @@ export class ProjectListComponent implements OnInit {
     }
   ];
 
+  isOpened = false;
+  previousOpenPalette = '';
+  paletteListener: Subscription;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -29,10 +34,33 @@ export class ProjectListComponent implements OnInit {
     private projectService: ProjectService,
     private deleteConfirmDialog: MatDialog,
     private eventManager: EventManager
-  ) { }
+  ) {
+    this.paletteListener = eventManager.subscribe('dsxApp.header', (response) => {
+      const palette = response.content;
+
+      if (!this.isOpened) {
+        // open palette
+        this.isOpened = true;
+        this.previousOpenPalette = palette;
+      } else if (palette === this.previousOpenPalette) {
+        // close palette
+        this.isOpened = false;
+        this.previousOpenPalette = '';
+      } else {
+        this.previousOpenPalette = palette;
+      }
+    });
+  }
 
   ngOnInit() {
     this.getProjects();
+  }
+
+  ngOnDestroy() {
+    // prevent memory leak when component destroyed
+    if (this.paletteListener !== undefined && this.paletteListener !== null) {
+      this.eventManager.destroy(this.paletteListener);
+    }
   }
 
   getProjects(): void {

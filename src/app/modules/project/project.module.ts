@@ -11,8 +11,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSortModule } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { ProjectListComponent } from './project-list/project-list.component';
@@ -26,6 +28,9 @@ import { LoggerService } from 'app/shared/logger.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { HeaderComponent } from 'app/layout/header/header.component';
+import { PaletteDirective, PaletteComponent } from 'app/layout/palette/palette.component';
+import { PaletteInfoComponent } from 'app/layout/palette/palette-info.component';
+import { PaletteConnectionComponent } from 'app/layout/palette/palette-connection.component';
 
 @NgModule({
   imports: [
@@ -40,8 +45,10 @@ import { HeaderComponent } from 'app/layout/header/header.component';
     MatMenuModule,
     MatPaginatorModule,
     MatSelectModule,
+    MatSidenavModule,
     MatSortModule,
     MatTableModule,
+    MatTooltipModule,
     RouterModule.forChild(projectRoutes),
     // i18n
     TranslateModule.forChild()
@@ -50,14 +57,20 @@ import { HeaderComponent } from 'app/layout/header/header.component';
     ProjectListComponent,
     ProjectNewFormComponent,
     ConfirmDialogComponent,
-    HeaderComponent
+    HeaderComponent,
+    PaletteComponent,
+    PaletteDirective,
+    PaletteInfoComponent,
+    PaletteConnectionComponent
   ],
   providers: [
     ProjectService,
     LoggerService
   ],
   entryComponents: [
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    PaletteInfoComponent,
+    PaletteConnectionComponent
   ]
 })
 export class ProjectModule { }

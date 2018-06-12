@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Project } from '../project.model';
 import { ProjectService } from '../project.service';
+import { Subscription } from 'rxjs';
 import { EventManager } from 'app/shared/event-manager.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { EventManager } from 'app/shared/event-manager.service';
   templateUrl: './project-new-form.component.html',
   styleUrls: ['./project-new-form.component.css']
 })
-export class ProjectNewFormComponent implements OnInit {
+export class ProjectNewFormComponent implements OnInit, OnDestroy {
   types = ['Normal', 'Library'];
   submitted = false;
   // model = new Project(0, '', '', '', '', 0);
@@ -27,6 +28,10 @@ export class ProjectNewFormComponent implements OnInit {
     }
   ];
 
+  isOpened = false;
+  previousOpenPalette = '';
+  paletteListener: Subscription;
+
   constructor(
     fb: FormBuilder,
     private projectService: ProjectService,
@@ -40,9 +45,31 @@ export class ProjectNewFormComponent implements OnInit {
       'type': 'Normal',
       'role': 'Admin'
     });
+
+    this.paletteListener = eventManager.subscribe('dsxApp.header', (response) => {
+      const palette = response.content;
+
+      if (!this.isOpened) {
+        // open palette
+        this.isOpened = true;
+        this.previousOpenPalette = palette;
+      } else if (palette === this.previousOpenPalette) {
+        // close palette
+        this.isOpened = false;
+        this.previousOpenPalette = '';
+      } else {
+        this.previousOpenPalette = palette;
+      }
+    });
   }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  ngOnDestroy() {
+    // prevent memory leak when component destroyed
+    if (this.paletteListener !== undefined && this.paletteListener !== null) {
+      this.eventManager.destroy(this.paletteListener);
+    }
   }
 
   onSave() {

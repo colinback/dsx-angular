@@ -48,6 +48,22 @@ mat-sidenav-container.sidenav-container {
   }
 }
 
+mat-sidenav.mat-sidenav.palette {
+  top: 0;
+  bottom: 0;
+  padding: 0;
+  min-width: 350px;
+  box-shadow: 6px 0 6px rgba(0,0,0,0.10);
+}
+
+mat-sidenav-container.sidenav-palette {
+  min-height: 100%;
+  height: auto !important;
+  max-width: 100%;
+  margin: 0;
+  transform: none;
+}
+
 mat-sidenav-container div.mat-sidenav-content {
   height: auto;
 }
