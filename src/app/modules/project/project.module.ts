@@ -25,6 +25,7 @@ import { LoggerService } from 'app/shared/logger.service';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { HeaderComponent } from 'app/layout/header/header.component';
 
 @NgModule({
   imports: [
@@ -48,7 +49,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
   declarations: [
     ProjectListComponent,
     ProjectNewFormComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    HeaderComponent
   ],
   providers: [
     ProjectService,

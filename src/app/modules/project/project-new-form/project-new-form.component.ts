@@ -17,6 +17,16 @@ export class ProjectNewFormComponent implements OnInit {
   model: Project;
   options: FormGroup;
 
+  headlinks = [
+    {
+      name: 'Projects',
+      url: '/projects'
+    }, {
+      name: 'Create Project',
+      url: '/projects/new'
+    }
+  ];
+
   constructor(
     fb: FormBuilder,
     private projectService: ProjectService,

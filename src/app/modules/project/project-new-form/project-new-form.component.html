@@ -1,50 +1,43 @@
-<div style="opacity: 1; transition: all 200ms easy-in-out;">
-  <div class="content">
-    <header class="marketing-banner">
-      <h1 class="banner-headline">Projects > Create Project</h1>
-    </header>
+<app-header [links]="headlinks"></app-header>
 
-    <article>
-      <div class="projects-container">
-        <div class="l-flex--column">
-          <div class="showcase" [hidden]="submitted">
-            <header class="c-header">
-              <h2>{{ 'project.create.label' | translate }}</h2>
-            </header>
+<article>
+  <div class="projects-container">
+    <div class="l-flex--column">
+      <div class="showcase" [hidden]="submitted">
+        <header class="c-header">
+          <h2>{{ 'project.create.label' | translate }}</h2>
+        </header>
 
-            <form [formGroup]="options" (ngSubmit)="onSave()" #projectForm="ngForm">
-              <label for="id">{{ 'project.create.id' | translate }}</label>
-              <mat-form-field floatLabel="never">
-                <input matInput type="number" placeholder="Project ID" formControlName="id">
-                <mat-error *ngIf="options.get('id')?.invalid">Minimum number: 1</mat-error>
-              </mat-form-field>
+        <form [formGroup]="options" (ngSubmit)="onSave()" #projectForm="ngForm">
+          <label for="id">{{ 'project.create.id' | translate }}</label>
+          <mat-form-field floatLabel="never">
+            <input matInput type="number" placeholder="Project ID" formControlName="id">
+            <mat-error *ngIf="options.get('id')?.invalid">Minimum number: 1</mat-error>
+          </mat-form-field>
 
-              <label for="name">{{ 'project.create.name' | translate }}</label>
-              <mat-form-field floatLabel="never">
-                <input matInput maxlength="20" placeholder="Project Name" formControlName="name" required>
-                <mat-hint align="end">{{options.value.name?.length || 0}}/20</mat-hint>
-              </mat-form-field>
+          <label for="name">{{ 'project.create.name' | translate }}</label>
+          <mat-form-field floatLabel="never">
+            <input matInput maxlength="20" placeholder="Project Name" formControlName="name" required>
+            <mat-hint align="end">{{options.value.name?.length || 0}}/20</mat-hint>
+          </mat-form-field>
 
-              <label for="description">{{ 'project.create.description' | translate }}</label>
-              <mat-form-field floatLabel="never">
-                <textarea matInput placeholder="Project Description" formControlName="description"></textarea>
-              </mat-form-field>
+          <label for="description">{{ 'project.create.description' | translate }}</label>
+          <mat-form-field floatLabel="never">
+            <textarea matInput placeholder="Project Description" formControlName="description"></textarea>
+          </mat-form-field>
 
-              <label for="type">{{ 'project.create.type' | translate }}</label>
-              <mat-form-field floatLabel="never">
-                <mat-select placeholder="Type" formControlName="type">
-                  <mat-option value="Normal">Normal</mat-option>
-                  <mat-option value="Library">Library</mat-option>
-                </mat-select>
-              </mat-form-field>
+          <label for="type">{{ 'project.create.type' | translate }}</label>
+          <mat-form-field floatLabel="never">
+            <mat-select placeholder="Type" formControlName="type">
+              <mat-option value="Normal">Normal</mat-option>
+              <mat-option value="Library">Library</mat-option>
+            </mat-select>
+          </mat-form-field>
 
-              <a mat-raised-button color="primary" routerLink="/projects">{{ 'project.create.cancel' | translate }}</a>
-              <button mat-raised-button color="primary" [disabled]="!projectForm.form.valid">{{ 'project.create.submit' | translate }}</button>
-            </form>
-          </div>
-        </div>
+          <a mat-raised-button color="primary" routerLink="/projects">{{ 'project.create.cancel' | translate }}</a>
+          <button mat-raised-button color="primary" [disabled]="!projectForm.form.valid">{{ 'project.create.submit' | translate }}</button>
+        </form>
       </div>
-    </article>
-
+    </div>
   </div>
-</div>
+</article>

@@ -30,10 +30,14 @@
   </mat-sidenav>
 
   <section class="sidenav-content" role="content">
-    <router-outlet></router-outlet>
+    <div style="opacity: 1; transition: all 200ms easy-in-out;">
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
   </section>
 </mat-sidenav-container>
 
 <footer class="no-print">
-  <app-footer [versionInfo]="1.2.0" ></app-footer>
+  <app-footer [versionInfo]="'1.2.0'" ></app-footer>
 </footer>

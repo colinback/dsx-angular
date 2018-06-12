@@ -1,0 +1,8 @@
+<header class="marketing-banner">
+  <span *ngFor="let link of links; let lst = last" class="banner-headline">
+    <a routerLink="{{ link.url }}">
+      {{ link.name }}
+    </a>
+    <mat-icon *ngIf="!lst">chevron_right</mat-icon>
+  </span>
+</header>

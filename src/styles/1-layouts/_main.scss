@@ -4,7 +4,7 @@ $blue: #1976D2;
 .marketing-banner {
   background-color: lighten($blue, 10);
   margin-top: 64px;
-  padding: 32px;
+  padding: 16px;
 
   @media (max-width: 600px) {
     margin-top: 56px;
@@ -12,7 +12,7 @@ $blue: #1976D2;
   }
 
   .banner-headline {
-    text-transform: uppercase;
+    // text-transform: uppercase;
     font-size: 24px;
     font-weight: 300;
     color: white;
@@ -23,6 +23,12 @@ $blue: #1976D2;
     @media (max-width: 600px) {
       font-size: 18px;
       font-weight: 400;
+    }
+
+    a {
+      font-size: 24px;
+      font-weight: 300;
+      color: white;
     }
 
     &:after {

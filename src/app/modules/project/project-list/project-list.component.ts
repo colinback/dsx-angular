@@ -15,6 +15,12 @@ import * as _ from 'lodash';
 export class ProjectListComponent implements OnInit {
   displayedColumns = ['name', 'type', 'role', 'lastUpdated', 'action'];
   dataSource: MatTableDataSource<Project>;
+  headlinks = [
+    {
+      name: 'Projects',
+      url: '/projects'
+    }
+  ];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
