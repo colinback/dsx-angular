@@ -1,48 +1,41 @@
+// angular
 import { BrowserModule } from '@angular/platform-browser';
-import { CdkTableModule } from '@angular/cdk/table';
 import { NgModule, Injector } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatIconRegistry } from '@angular/material/icon';
 
-import { AppComponent } from './app.component';
-import { TopMenuComponent } from './layout/top-menu/top-menu.component';
+// local/session storage
+import { Ng2Webstorage, LocalStorageService, SessionStorageService  } from 'ngx-webstorage';
 
-import { CustomIconRegistry, SVG_ICONS } from 'app/shared/custom-icon-registry';
-import { NavMenuComponent } from './layout/nav-menu/nav-menu.component';
-import { FooterComponent } from './layout/footer/footer.component';
-import { AppRoutingModule } from './app-routing.module';
-import { ProjectModule} from './modules/project/project.module';
-
+// ngx-translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MissingTranslationHandler, MissingTranslationHandlerParams } from '@ngx-translate/core';
-import { Ng2Webstorage, LocalStorageService, SessionStorageService  } from 'ngx-webstorage';
 
+// shared service
+import { CustomIconRegistry, SVG_ICONS } from 'app/shared/custom-icon-registry';
 import { EventManager } from './shared/event-manager.service';
-import { NotificationComponent } from './layout/notification/notification.component';
 import { ErrorHandlerInterceptor } from './shared/interceptor/errorhandler.interceptor';
 import { AuthInterceptor } from './shared/interceptor/auth.interceptor';
 import { AuthExpiredInterceptor } from './shared/interceptor/auth-expired.interceptor';
-
 import { LoginService } from './shared/login.service';
+import { LoggerService } from './shared/logger.service';
 import { CSRFService } from './shared/auth/csrf.service';
 import { Principal } from './shared/auth/principal.service';
 import { AuthServerProvider } from './shared/auth/auth-jwt.service';
 import { AccountService } from './shared/auth/account.service';
 import { StateStorageService } from './shared/auth/state-storage.service';
 import { UserRouteAccessService } from './shared/auth/user-route-access.service';
-import { HasAnyAuthorityDirective } from './shared/auth/has-any-authority.directive';
 
+// api mock
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryApiService } from './in-memory-api.service';
+
+import { AppRoutingModule } from './app-routing.module';
+import { ProjectModule} from './modules/project/project.module';
+import { LayoutModule } from './modules/layout/layout.module';
+import { MainComponent } from './modules/layout/main/main.component';
 
 export const svgIconProviders = [
   {
@@ -90,33 +83,16 @@ export class MissingTranslation implements MissingTranslationHandler {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    TopMenuComponent,
-    NavMenuComponent,
-    FooterComponent,
-    NotificationComponent,
-    HasAnyAuthorityDirective
   ],
   imports: [
     AppRoutingModule,
+    BrowserAnimationsModule,
     BrowserModule,
-    CdkTableModule,
     Ng2Webstorage.forRoot({ prefix: 'dsx', separator: '-'}),
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryApiService, { passThruUnknownUrl: true, dataEncapsulation: false }
     ),
-    // FormsModule,
-    // ReactiveFormsModule
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    BrowserAnimationsModule,
-    ProjectModule,
     // i18n
     TranslateModule.forRoot({
       loader: {
@@ -128,7 +104,9 @@ export class MissingTranslation implements MissingTranslationHandler {
         provide: MissingTranslationHandler,
         useClass: MissingTranslation
       }
-    })
+    }),
+    ProjectModule,
+    LayoutModule
   ],
   providers: [
     AccountService,
@@ -136,6 +114,7 @@ export class MissingTranslation implements MissingTranslationHandler {
     Principal,
     StateStorageService,
     LoginService,
+    LoggerService,
     LocalStorageService,
     SessionStorageService,
     CSRFService,
@@ -169,6 +148,6 @@ export class MissingTranslation implements MissingTranslationHandler {
       ]
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [MainComponent]
 })
 export class AppModule { }

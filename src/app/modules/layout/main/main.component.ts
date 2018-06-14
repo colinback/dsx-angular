@@ -1,16 +1,17 @@
-import { Component, HostBinding, HostListener, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding, HostListener, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { EventManager } from './shared/event-manager.service';
-import { NotificationComponent } from './layout/notification/notification.component';
+import { EventManager } from 'app/shared/event-manager.service';
+import { NotificationComponent } from 'app/modules/layout/notification/notification.component';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class MainComponent implements OnInit {
+
   progressBarListener: Subscription;
 
   /**
