@@ -10,6 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { ProjectNewFormComponent } from './project-new-form/project-new-form.component';
+import { ProjectOverviewComponent } from './project-overview/project-overview.component';
 
 // layout palette component
 import { PaletteInfoComponent } from 'app/modules/layout/palette/palette-info.component';
@@ -30,7 +31,8 @@ import { LayoutModule } from 'app/modules/layout/layout.module';
   declarations: [
     ProjectListComponent,
     ProjectNewFormComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ProjectOverviewComponent
   ],
   providers: [
     ProjectService

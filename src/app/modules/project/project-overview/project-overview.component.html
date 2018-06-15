@@ -1,0 +1,99 @@
+<app-header [links]="headlinks" [isVisible]="false"></app-header>
+
+<article>
+  <div class="projects-container">
+    <div class="l-flex--column">
+      <div class="showcase">
+        <header class="c-header">
+          <h2>Project Overview</h2>
+        </header>
+
+        <mat-tab-group class="demo-tab-group">
+      <mat-tab label="All">
+        <div class="demo-tab-content">
+          <!-- notebook table -->
+          <h3>Notebooks</h3>
+          <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="nbDataSource">
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
+
+              <!-- Status Column -->
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+              </ng-container>
+
+              <!-- Langaue Column -->
+              <ng-container matColumnDef="language">
+                <th mat-header-cell *matHeaderCellDef> Langaue </th>
+                <td mat-cell *matCellDef="let element"> {{element.language}} </td>
+              </ng-container>
+
+              <!-- lastUpdated Column -->
+              <ng-container matColumnDef="lastUpdated">
+                <th mat-header-cell *matHeaderCellDef> Last Updated </th>
+                <td mat-cell *matCellDef="let element"> {{element.lastUpdated | date:'medium'}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="nbDisplayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: nbDisplayedColumns;"></tr>
+            </table>
+          </div>
+
+          <!-- dataset table -->
+          <h3>Data Sets</h3>
+          <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dsDataSource">
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
+
+              <!-- Status Column -->
+              <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef> Type </th>
+                <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+              </ng-container>
+
+              <!-- Langaue Column -->
+              <ng-container matColumnDef="size">
+                <th mat-header-cell *matHeaderCellDef> Size </th>
+                <td mat-cell *matCellDef="let element"> {{element.size}} </td>
+              </ng-container>
+
+              <!-- lastUpdated Column -->
+              <ng-container matColumnDef="lastUpdated">
+                <th mat-header-cell *matHeaderCellDef> Last Updated </th>
+                <td mat-cell *matCellDef="let element"> {{element.lastUpdated | date:'medium'}} </td>
+              </ng-container>
+
+              <!-- lastUpdated Column -->
+              <ng-container matColumnDef="datasource">
+                <th mat-header-cell *matHeaderCellDef> Data Source </th>
+                <td mat-cell *matCellDef="let element"> {{element.datasource}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="dsDisplayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: dsDisplayedColumns;"></tr>
+            </table>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Notebook">
+        <div class="demo-tab-content">
+          Should be Notebook table
+        </div>
+      </mat-tab>
+      <mat-tab label="Data Set" disabled>
+        No content
+      </mat-tab>
+    </mat-tab-group>
+      </div>
+    </div>
+  </div>
+</article>

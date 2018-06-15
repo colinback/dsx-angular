@@ -2,7 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-const appRoutes: Routes = [];
+const appRoutes: Routes = [
+  {
+    path: '',
+    redirectTo: '/community',
+    pathMatch: 'full'
+  },
+];
 
 @NgModule({
   imports: [

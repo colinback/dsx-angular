@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/shared/auth/user-route-access.service';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { ProjectNewFormComponent } from './project-new-form/project-new-form.component';
+import { ProjectOverviewComponent } from './project-overview/project-overview.component';
 
 export const projectRoutes: Routes = [
   {
@@ -15,6 +16,14 @@ export const projectRoutes: Routes = [
   {
     path: 'projects/new',
     component: ProjectNewFormComponent,
+    data: {
+        authorities: ['ROLE_USER']
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: 'projects/:id',
+    component: ProjectOverviewComponent,
     data: {
         authorities: ['ROLE_USER']
     },

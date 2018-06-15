@@ -19,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSortModule } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -59,6 +60,7 @@ import { HasAnyAuthorityDirective } from 'app/shared/auth/has-any-authority.dire
     MatSidenavModule,
     MatSortModule,
     MatTableModule,
+    MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
     TranslateModule.forChild()
@@ -91,6 +93,7 @@ import { HasAnyAuthorityDirective } from 'app/shared/auth/has-any-authority.dire
     MatSelectModule,
     MatSortModule,
     MatTableModule,
+    MatTabsModule,
     MatTooltipModule,
     // layout component
     HeaderComponent,

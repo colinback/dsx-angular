@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { Router } from '@angular/router';
+import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Project } from '../project.model';
 import { ProjectService } from '../project.service';
 import { ConfirmDialogComponent } from 'app/modules/project/confirm-dialog/confirm-dialog.component';
@@ -31,6 +32,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
+    private router: Router,
     private projectService: ProjectService,
     private deleteConfirmDialog: MatDialog,
     private eventManager: EventManager
@@ -107,5 +109,9 @@ export class ProjectListComponent implements OnInit, OnDestroy {
         this.onRemove(project.id);
       }
     });
+  }
+
+  toOverview(project: Project) {
+    this.router.navigate([`/projects/${project.name}`]);
   }
 }
