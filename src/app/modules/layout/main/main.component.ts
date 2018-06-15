@@ -10,7 +10,7 @@ import { NotificationComponent } from 'app/modules/layout/notification/notificat
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, OnDestroy {
 
   progressBarListener: Subscription;
 

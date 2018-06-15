@@ -7,7 +7,7 @@ import { EventManager } from 'app/shared/event-manager.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  @Input() isVisible: boolean;
   @Input() links: any;
   @Input() palettes: any;
 

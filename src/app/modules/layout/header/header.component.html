@@ -7,7 +7,7 @@
       <mat-icon *ngIf="!lst">chevron_right</mat-icon>
     </span>
   </span>
-  <span>
+  <span *ngIf="isVisible">
     <button mat-button class="hamburger" color="primary" (click)="toggle('info')"
       matTooltip="Info">
       <mat-icon>info</mat-icon>

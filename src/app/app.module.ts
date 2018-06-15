@@ -35,6 +35,7 @@ import { InMemoryApiService } from './in-memory-api.service';
 import { AppRoutingModule } from './app-routing.module';
 import { ProjectModule} from './modules/project/project.module';
 import { LayoutModule } from './modules/layout/layout.module';
+import { CommunityModule } from './modules/community/community.module';
 import { MainComponent } from './modules/layout/main/main.component';
 
 export const svgIconProviders = [
@@ -106,6 +107,7 @@ export class MissingTranslation implements MissingTranslationHandler {
       }
     }),
     ProjectModule,
+    CommunityModule,
     LayoutModule
   ],
   providers: [

@@ -7,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommunityListComponent implements OnInit {
 
+  headlinks = [
+    {
+      name: 'Community',
+      url: '/community'
+    }
+  ];
+
   constructor() { }
 
   ngOnInit() {
